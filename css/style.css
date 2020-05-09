@@ -322,7 +322,7 @@ section .section-content article figure {
   margin: 0;
 }
 section .section-content article figure img {
-  width: 100%;
+  max-width: 100%;
 }
 section .section-content article figure.illustration {
   padding: 0 2em;
