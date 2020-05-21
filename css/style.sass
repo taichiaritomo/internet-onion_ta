@@ -22,15 +22,6 @@ button
   color: inherit
   font: inherit
 header
-  // position: absolute
-  // top: 2em
-  // left: 2em
-  // right: 2em
-  // z-index: 100
-  // @media screen and (max-width: $breakpoint)
-  //   top: 1em
-  //   left: 1em
-  //   right: 1em
   h1
     position: absolute
     top: 2em
@@ -191,16 +182,23 @@ header
         border-bottom-width: 0
 button.peel-button
   position: fixed
-  bottom: 0
-  left: 0
-  width: 100%
-  height: 2em
+  bottom: 2em
+  left: 2em
+  width: 5em
+  height: 5em
+  border-radius: 50%
   z-index: 100
   padding: 5px 8px
   cursor: pointer
   background: white
   transition: background ease-out 0.1s
   display: block
+  @media screen and (max-width: $breakpoint)
+    bottom: 0
+    left: 0
+    width: 100%
+    height: 2em
+    border-radius: 0
   &.hidden
     display: none
 section
@@ -230,10 +228,12 @@ section
     position: fixed
     top: 0
     left: 0
-    bottom: 2em
+    bottom: 0
     right: 0
     z-index: 1
     pointer-events: none
+    @media screen and (max-width: $breakpoint)
+      bottom: 2em
   .section-content
     width: 100%
     overflow-x: hidden
@@ -381,6 +381,11 @@ section#section-0
           user-select: none
           @media screen and (max-width: 720px)
             flex: 0 0 50%
+          .contributor-title
+            display: inline-block
+            padding: 0.5em
+            background: transparent
+            transition: background 0.1s linear, color 0.1s linear
           figure
             margin: 0
             width: 100%
@@ -430,7 +435,6 @@ section#section-4
     @media screen and (max-width: $breakpoint)
       box-shadow: inset 0 0 0.5em 0.5em LimeGreen
   table
-    // border-spacing: 0.5em
     tr td
       vertical-align: top
       padding-bottom: 0.5em

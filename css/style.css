@@ -247,16 +247,26 @@ header nav ul.show-all li#header-nav-link_about, header nav ul.show-all li#heade
 
 button.peel-button {
   position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 2em;
+  bottom: 2em;
+  left: 2em;
+  width: 5em;
+  height: 5em;
+  border-radius: 50%;
   z-index: 100;
   padding: 5px 8px;
   cursor: pointer;
   background: white;
   transition: background ease-out 0.1s;
   display: block;
+}
+@media screen and (max-width: 480px) {
+  button.peel-button {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2em;
+    border-radius: 0;
+  }
 }
 button.peel-button.hidden {
   display: none;
@@ -294,10 +304,15 @@ section .section-color-edges {
   position: fixed;
   top: 0;
   left: 0;
-  bottom: 2em;
+  bottom: 0;
   right: 0;
   z-index: 1;
   pointer-events: none;
+}
+@media screen and (max-width: 480px) {
+  section .section-color-edges {
+    bottom: 2em;
+  }
 }
 section .section-content {
   width: 100%;
@@ -495,6 +510,12 @@ section#section-0 .section-content #contributors ol li {
   section#section-0 .section-content #contributors ol li {
     flex: 0 0 50%;
   }
+}
+section#section-0 .section-content #contributors ol li .contributor-title {
+  display: inline-block;
+  padding: 0.5em;
+  background: transparent;
+  transition: background 0.1s linear, color 0.1s linear;
 }
 section#section-0 .section-content #contributors ol li figure {
   margin: 0;

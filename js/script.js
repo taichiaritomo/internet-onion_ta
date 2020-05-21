@@ -12,38 +12,11 @@ $(document).ready(function() {
   // set current section
   var allSections = document.querySelectorAll('section');
   var currentSectionIndex = 1;
-  // $('.onion .layer#layer-1').find('.layer').addClass('hide');
 
   document.querySelectorAll('button.peel-button').forEach(button => {
     button.addEventListener('click', () => {
       goDown();
       button.blur();
-    });
-    button.addEventListener('mouseenter', () => {
-      if (currentSectionIndex < allSections.length - 1) {
-        $(button).css('background', $('section.current + section > .section-color-backdrop').css('background'));
-        $(button).css('color', $('section.current + section > .section-content').css('color'));
-      } else {
-        $(button).css('background', $('section.current > .section-color-backdrop').css('background'));
-        $(button).css('color', $('section.current > .section-content').css('color'));
-      }
-    });
-    button.addEventListener('mouseleave', () => {
-      $(button).css('background', 'white');
-      $(button).css('color', '');
-    });
-    button.addEventListener('touchstart', () => {
-      if (currentSectionIndex < allSections.length - 1) {
-        $(button).css('background', $('section.current + section > .section-color-backdrop').css('background'));
-        $(button).css('color', $('section.current + section > .section-content').css('color'));
-      } else {
-        $(button).css('background', $('section.current > .section-color-backdrop').css('background'));
-        $(button).css('color', $('section.current > .section-content').css('color'));
-      }
-    });
-    button.addEventListener('touchend', () => {
-      $(button).css('background', 'white');
-      $(button).css('color', '');
     });
   });
 
@@ -96,13 +69,16 @@ $(document).ready(function() {
     })
     .bind('mouseenter touchstart', function() {
       var index = $(this).attr('id').split('-')[1];
-      $('.onion-container').addClass('floating').css('mix-blend-mode', 'normal');
-      getOnionLayer(index).addClass('hover');
+      var section = getSection(index);
+      var sectionColor = $(section).find('.section-color-backdrop').css('background');
+      var sectionTextColor = $(section).find('.section-content').css('color');
+      var contributorTitle = $(this).find('span.contributor-title');
+      contributorTitle.css('background', sectionColor);
+      contributorTitle.css('color', sectionTextColor);
     })
     .bind('mouseleave touchend', function() {
-      var index = $(this).attr('id').split('-')[1];
-      $('.onion-container').removeClass('floating').css('mix-blend-mode', '');
-      getOnionLayer(index).removeClass('hover');
+      $(this).find('span.contributor-title').css('background', '');
+      $(this).find('span.contributor-title').css('color', '');
     });
   }
 
@@ -151,6 +127,14 @@ $(document).ready(function() {
       $('header h1').css('color', $('section.current > .section-content').css('color')); // make LOVE IN THE CLOUD h1 match the section's text color
       $('header nav ul').removeClass('show-all'); // hide ABOUT and CONTRIBUTORS links in header nav
       $('header nav ul li#header-nav-link_index').removeClass('current');
+
+      if (currentSectionIndex < allSections.length - 1) {
+        $('.peel-button').css('background', $('section.current + section > .section-color-backdrop').css('background'));
+        $('.peel-button').css('color', $('section.current + section > .section-content').css('color'));
+      } else {
+        $('.peel-button').css('background', 'white');
+        $('.peel-button').css('color', 'black');
+      }
     }
   }
 
@@ -239,31 +223,6 @@ $(document).ready(function() {
   function playRubbingSound() {
     var audioPlayer = document.querySelector('.sounds.rubbing audio');
     audioPlayer.play();
-  }
-
-  /*******************
-   * CONTRIBUTORS DIRECTORY
-   *******************/
-  function setupContributorsDirectory() {
-    $('#section-0 .section-content #contributors ol li')
-    .click(function() {
-      var index = $(this).attr('id').split('-')[1];
-      goToSection(index);
-      playRandomChoppingSound();
-      $('.onion-container').css('mix-blend-mode', '');
-      getOnionLayer(index).removeClass('hover');
-      $(this).off('mouseleave').off('touchend');
-    })
-    .bind('mouseenter touchstart', function() {
-      var index = $(this).attr('id').split('-')[1];
-      $('.onion-container').addClass('floating').css('mix-blend-mode', 'normal');
-      getOnionLayer(index).addClass('hover');
-    })
-    .bind('mouseleave touchend', function() {
-      var index = $(this).attr('id').split('-')[1];
-      $('.onion-container').removeClass('floating').css('mix-blend-mode', '');
-      getOnionLayer(index).removeClass('hover');
-    });
   }
 
 
